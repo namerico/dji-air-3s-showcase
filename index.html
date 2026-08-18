@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Alta Fidelidade com Câmera Dupla 1 Polegada e LiDAR Noturno.">
-  <title>DJI Air 3S | Chase the View • Mira Experience</title>
+  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Alta Fidelidade com Palco 3D Interativo e Fotos Oficiais.">
+  <title>DJI Air 3S | Chase the View • Mira 3D Experience</title>
   <link rel="icon" href="data:,">
   <style>
     :root {
       --bg-primary: #06070a;
       --bg-secondary: #0d111a;
-      --bg-card: rgba(13, 17, 26, 0.8);
+      --bg-card: rgba(13, 17, 26, 0.85);
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
       --accent: #38bdf8;
+      --accent-orange: #f97316;
       --accent-glow: rgba(56, 189, 248, 0.25);
       --border: rgba(255, 255, 255, 0.08);
       --border-highlight: rgba(56, 189, 248, 0.3);
@@ -95,7 +96,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* Grid do Hero */
+    /* Grid do Hero e Layout 3D */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -114,25 +115,25 @@
       margin-bottom: 12px;
     }
 
-    .copy-block h1 {
-      font-size: clamp(2.5rem, 4.8vw, 4.2rem);
+    .copy-block h1, .copy-block h2 {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
       margin-bottom: 18px;
     }
 
-    .copy-block h1 span.accent {
+    .copy-block h1 span.accent, .copy-block h2 span.accent {
       background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .copy-block p.lead {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       color: var(--text-secondary);
       max-width: 540px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       line-height: 1.6;
     }
 
@@ -140,7 +141,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .spec-badge {
@@ -163,10 +164,10 @@
       color: #bae6fd;
     }
 
-    /* Palco de Imagem de Alta Fidelidade / 3D */
+    /* Palco de Imagem de Alta Fidelidade */
     .stage-hero {
       width: 100%;
-      height: 560px;
+      height: 540px;
       position: relative;
       background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12) 0%, rgba(13, 17, 26, 0.6) 60%, transparent 85%);
       border-radius: 24px;
@@ -187,7 +188,53 @@
     }
 
     .stage-hero:hover .hero-product-img {
-      transform: scale(1.04) translateY(-8px);
+      transform: scale(1.04) translateY(-6px);
+    }
+
+    /* Palco 3D WebGL */
+    .stage-3d {
+      width: 100%;
+      height: 540px;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12) 0%, rgba(13, 17, 26, 0.6) 60%, transparent 85%);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .canvas-container {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      gap: 12px;
+      transition: opacity 0.5s ease;
+      z-index: 10;
+    }
+
+    .spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* Slide 2: Recursos de Câmera & Tecnologia */
@@ -235,7 +282,7 @@
       line-height: 1.6;
     }
 
-    /* Slide 3: Galeria Oficial de Estúdio */
+    /* Slide 4: Galeria Oficial */
     .gallery-grid {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
@@ -310,7 +357,7 @@
       .slide {
         padding: 24px;
       }
-      .stage-hero {
+      .stage-hero, .stage-3d {
         height: 380px;
       }
       .gallery-main-img {
@@ -318,6 +365,14 @@
       }
     }
   </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -325,6 +380,7 @@
     <button class="nav-dot active" data-target="0" aria-label="Slide 1"></button>
     <button class="nav-dot" data-target="1" aria-label="Slide 2"></button>
     <button class="nav-dot" data-target="2" aria-label="Slide 3"></button>
+    <button class="nav-dot" data-target="3" aria-label="Slide 4"></button>
   </nav>
 
   <main>
@@ -332,25 +388,25 @@
     <section class="slide" id="slide-0">
       <header class="topline">
         <div class="brand"><strong>DJI AIR 3S</strong> • CHASE THE VIEW</div>
-        <div class="slide-no">01 / 03</div>
+        <div class="slide-no">01 / 04</div>
       </header>
 
       <div class="hero-grid">
         <div class="copy-block">
-          <p class="eyebrow">Drone de Viagem Flagship</p>
+          <p class="eyebrow">Drone Flagship de Câmera Dupla</p>
           <h1>DJI <span class="accent">Air 3S</span></h1>
-          <p class="lead">Sistema de câmera dupla primária com sensor CMOS de 1 polegada e telefoto média de 70 mm. Até 14 paradas de faixa dinâmica, gravação em 4K/60fps HDR e novo modo Panorama Livre.</p>
+          <p class="lead">Câmera primária com sensor CMOS de 1 polegada e teleobjetiva média de 70 mm. Até 14 paradas de faixa dinâmica, 4K/60fps HDR e novo modo Panorama Livre com detecção noturna LiDAR.</p>
           
           <div class="specs-list">
             <span class="spec-badge highlight">📷 Sensor CMOS 1" + Tele 70mm</span>
-            <span class="spec-badge">🌙 Detecção Noturna com LiDAR</span>
+            <span class="spec-badge">🌙 LiDAR Noturno Omnidirecional</span>
             <span class="spec-badge">🔋 Até 45 min de Voo</span>
-            <span class="spec-badge">📡 Transmissão O4 até 20 km</span>
+            <span class="spec-badge">📡 Transmissão O4 20 km</span>
           </div>
         </div>
 
         <div class="stage-hero">
-          <img src="assets/images/dji_air_3s_10.jpg" alt="DJI Air 3S Oficial" class="hero-product-img" onerror="this.src='https://www-cdn.djiits.com/dps/f6a0cccb0be81f73cc0a23c06fe6424d.jpg'">
+          <img src="assets/images/dji_air_3s_10.jpg" alt="DJI Air 3S Oficial" class="hero-product-img">
         </div>
       </div>
 
@@ -364,7 +420,7 @@
     <section class="slide" id="slide-1">
       <header class="topline">
         <div class="brand"><strong>DJI AIR 3S</strong> • TECNOLOGIA & INOVAÇÃO</div>
-        <div class="slide-no">02 / 03</div>
+        <div class="slide-no">02 / 04</div>
       </header>
 
       <div class="features-grid">
@@ -393,24 +449,67 @@
       </footer>
     </section>
 
-    <!-- Slide 3: Galeria Oficial de Estúdio & Voo -->
+    <!-- Slide 3: NOVO PALCO 3D INTERATIVO 360° -->
     <section class="slide" id="slide-2">
       <header class="topline">
-        <div class="brand"><strong>DJI AIR 3S</strong> • GALERIA DE ESTÚDIO OFICIAL</div>
-        <div class="slide-no">03 / 03</div>
+        <div class="brand"><strong>DJI AIR 3S</strong> • EXPERIÊNCIA 3D INTERATIVA</div>
+        <div class="slide-no">03 / 04</div>
+      </header>
+
+      <div class="hero-grid">
+        <div class="copy-block">
+          <p class="eyebrow">Visualização 360° de Hardware</p>
+          <h2>Explore o <span class="accent">Design 3D</span></h2>
+          <p class="lead">Gire o drone com o mouse, inspecione a aerodinâmica dos 4 braços, os motores brushless de alta eficiência e o conjunto óptico com estabilização mecânica de 3 eixos.</p>
+          
+          <div class="specs-list">
+            <span class="spec-badge">🔄 Órbita 360° Livre</span>
+            <span class="spec-badge">🔍 Zoom Centralizado</span>
+            <span class="spec-badge">✨ Renderização PBR em Tempo Real</span>
+          </div>
+        </div>
+
+        <div class="stage-3d">
+          <div id="loader-3d" class="loading-overlay">
+            <div class="spinner"></div>
+            <span>Carregando Drone em 3D...</span>
+          </div>
+          <div id="canvas-drone-3d" class="canvas-container" data-model="model.glb"></div>
+        </div>
+      </div>
+
+      <footer class="footnote">
+        <span>Arraste com o mouse para girar em 360° e use o scroll para aproximar</span>
+        <span>Three.js Engine • Mira Animator</span>
+      </footer>
+    </section>
+
+    <!-- Slide 4: Galeria Oficial de Estúdio & Voo -->
+    <section class="slide" id="slide-3">
+      <header class="topline">
+        <div class="brand"><strong>DJI AIR 3S</strong> • GALERIA OFICIAL EM VOO</div>
+        <div class="slide-no">04 / 04</div>
       </header>
 
       <div class="gallery-grid">
         <div class="gallery-main-img">
-          <img id="gallery-target" src="assets/images/dji_air_3s_2.jpg" alt="DJI Air 3S em Ação" onerror="this.src='https://www-cdn.djiits.com/dps/e85cd88799f7ec307ea3a5d0aadb9bfd.jpg'">
+          <img id="gallery-target" src="assets/images/dji_air_3s_flight.png" alt="DJI Air 3S em Voo" onerror="this.src='assets/images/dji_air_3s_2.jpg'">
         </div>
 
         <div class="gallery-thumbs">
+          <div class="thumb-item" onclick="document.getElementById('gallery-target').src='assets/images/dji_air_3s_flight.png'">
+            <span class="thumb-badge">Voo Real</span>
+            <div>
+              <strong>DJI Air 3S no Horizonte</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Propulsão silenciosa de alta velocidade e luzes de navegação ativas.</p>
+            </div>
+          </div>
+
           <div class="thumb-item" onclick="document.getElementById('gallery-target').src='assets/images/dji_air_3s_2.jpg'">
             <span class="thumb-badge">4K HDR</span>
             <div>
-              <strong>Design Aerodinâmico Dobrável</strong>
-              <p style="font-size: 0.85rem; color: var(--text-secondary);">Braços dobráveis de alta rigidez para portabilidade extrema em viagens.</p>
+              <strong>Design Dobrável Premium</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Estrutura compacta pronta para transporte rápido na mochila.</p>
             </div>
           </div>
 
@@ -419,14 +518,6 @@
             <div>
               <strong>Gimbal Estabilizado de 3 Eixos</strong>
               <p style="font-size: 0.85rem; color: var(--text-secondary);">Estabilização mecânica ultra-suave com suporte a novos ângulos verticais.</p>
-            </div>
-          </div>
-
-          <div class="thumb-item" onclick="document.getElementById('gallery-target').src='assets/images/dji_air_3s_7.jpg'">
-            <span class="thumb-badge">O4 20km</span>
-            <div>
-              <strong>Controle Remoto com Tela HD</strong>
-              <p style="font-size: 0.85rem; color: var(--text-secondary);">Controle preciso com transmissão em tempo real de latência ultra-baixa.</p>
             </div>
           </div>
         </div>
@@ -439,8 +530,121 @@
     </section>
   </main>
 
-  <script>
-    // Navegação de slides com os botões laterais
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    function init3DViewer() {
+      const container = document.getElementById('canvas-drone-3d');
+      const loaderEl = document.getElementById('loader-3d');
+      if (!container) return;
+
+      const width = container.clientWidth || 600;
+      const height = container.clientHeight || 500;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+      camera.position.set(0, 0.6, 2.8);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.35;
+      container.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.enablePan = false;
+      controls.minDistance = 0.8;
+      controls.maxDistance = 5.5;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 1.3;
+      controls.target.set(0, 0, 0);
+
+      let resumeTimer;
+      controls.addEventListener('start', () => {
+        controls.autoRotate = false;
+        clearTimeout(resumeTimer);
+      });
+      controls.addEventListener('end', () => {
+        resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 2000);
+      });
+
+      // Iluminação de Estúdio PBR
+      const ambientLight = new THREE.HemisphereLight(0xffffff, 0x1e293b, 2.4);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 4.8);
+      keyLight.position.set(4, 7, 5);
+      scene.add(keyLight);
+
+      const fillLight = new THREE.DirectionalLight(0x38bdf8, 2.2);
+      fillLight.position.set(-5, -1, 4);
+      scene.add(fillLight);
+
+      const rimLight = new THREE.DirectionalLight(0xffffff, 4.0);
+      rimLight.position.set(0, 5, -6);
+      scene.add(rimLight);
+
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load('model.glb', (gltf) => {
+        const model = gltf.scene;
+        model.updateMatrixWorld(true);
+        
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        
+        model.position.x = -center.x;
+        model.position.y = -center.y;
+        model.position.z = -center.z;
+
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const targetScale = 1.45 / maxDim;
+        
+        const pivotGroup = new THREE.Group();
+        pivotGroup.add(model);
+        pivotGroup.scale.setScalar(targetScale);
+        scene.add(pivotGroup);
+
+        controls.target.set(0, 0, 0);
+        controls.update();
+
+        if (loaderEl) {
+          loaderEl.style.opacity = '0';
+          setTimeout(() => loaderEl?.remove(), 400);
+        }
+      }, undefined, (err) => {
+        console.error('Erro ao carregar modelo 3D:', err);
+        if (loaderEl) loaderEl.innerHTML = '<span style="color:#ef4444">Erro ao carregar modelo .glb</span>';
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      const handleResize = () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        if (!w || !h) return;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      };
+      window.addEventListener('resize', handleResize);
+      new ResizeObserver(handleResize).observe(container);
+    }
+
+    init3DViewer();
+
+    // Navegação de slides
     const dots = document.querySelectorAll('.nav-dot');
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
@@ -450,7 +654,6 @@
       });
     });
 
-    // Observer para atualizar a navegação ao rolar
     const slides = document.querySelectorAll('.slide');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -461,7 +664,6 @@
         }
       });
     }, { threshold: 0.5 });
-
     slides.forEach(s => observer.observe(s));
   </script>
 </body>
