@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Alta Fidelidade com Palco 3D Interativo e Fotos Oficiais.">
-  <title>DJI Air 3S | Chase the View • Mira 3D Experience</title>
+  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Alta Fidelidade com Visualizador Interativo e Fotos Oficiais.">
+  <title>DJI Air 3S | Chase the View • Mira Experience</title>
   <link rel="icon" href="data:,">
   <style>
     :root {
@@ -74,8 +74,6 @@
       padding: 36px 60px;
       position: relative;
       border-bottom: 1px solid var(--border);
-      background-size: cover;
-      background-position: center;
     }
 
     .topline {
@@ -96,7 +94,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* Grid do Hero e Layout 3D */
+    /* Grids */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -180,10 +178,10 @@
     }
 
     .hero-product-img {
-      width: 90%;
-      max-height: 85%;
+      width: 92%;
+      max-height: 88%;
       object-fit: contain;
-      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.8));
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.85));
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -191,53 +189,75 @@
       transform: scale(1.04) translateY(-6px);
     }
 
-    /* Palco 3D WebGL */
-    .stage-3d {
+    /* Palco Interativo 360° do Drone */
+    .stage-interactive {
       width: 100%;
       height: 540px;
       position: relative;
-      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12) 0%, rgba(13, 17, 26, 0.6) 60%, transparent 85%);
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, rgba(13, 17, 26, 0.7) 60%, transparent 85%);
       border-radius: 24px;
       border: 1px solid var(--border);
       overflow: hidden;
       box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 20px 50px rgba(0,0,0,0.5);
-    }
-
-    .canvas-container {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .loading-overlay {
-      position: absolute;
-      inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: var(--bg-primary);
+      padding: 24px;
+    }
+
+    .interactive-viewer {
+      width: 100%;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .interactive-viewer:active {
+      cursor: grabbing;
+    }
+
+    .interactive-img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      filter: drop-shadow(0 24px 36px rgba(0,0,0,0.9));
+      transition: transform 0.3s ease, opacity 0.4s ease;
+      user-select: none;
+    }
+
+    .angle-selector {
+      display: flex;
+      gap: 10px;
+      background: rgba(13, 17, 26, 0.9);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .angle-btn {
+      background: transparent;
+      border: 1px solid transparent;
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      gap: 12px;
-      transition: opacity 0.5s ease;
-      z-index: 10;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .spinner {
-      width: 34px;
-      height: 34px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .angle-btn.active, .angle-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: #fff;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Slide 2: Recursos de Câmera & Tecnologia */
+    /* Slide 2: Recursos */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -357,7 +377,7 @@
       .slide {
         padding: 24px;
       }
-      .stage-hero, .stage-3d {
+      .stage-hero, .stage-interactive {
         height: 380px;
       }
       .gallery-main-img {
@@ -365,14 +385,6 @@
       }
     }
   </style>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
 </head>
 <body>
 
@@ -449,38 +461,43 @@
       </footer>
     </section>
 
-    <!-- Slide 3: NOVO PALCO 3D INTERATIVO 360° -->
+    <!-- Slide 3: INSPEÇÃO 360° REALISTA DO PRODUTO -->
     <section class="slide" id="slide-2">
       <header class="topline">
-        <div class="brand"><strong>DJI AIR 3S</strong> • EXPERIÊNCIA 3D INTERATIVA</div>
+        <div class="brand"><strong>DJI AIR 3S</strong> • INSPEÇÃO INTERATIVA 360°</div>
         <div class="slide-no">03 / 04</div>
       </header>
 
       <div class="hero-grid">
         <div class="copy-block">
-          <p class="eyebrow">Visualização 360° de Hardware</p>
-          <h2>Explore o <span class="accent">Design 3D</span></h2>
-          <p class="lead">Gire o drone com o mouse, inspecione a aerodinâmica dos 4 braços, os motores brushless de alta eficiência e o conjunto óptico com estabilização mecânica de 3 eixos.</p>
+          <p class="eyebrow">Design & Detalhes Fotográficos</p>
+          <h2>Inspeção <span class="accent">360° Realista</span></h2>
+          <p class="lead">Alterne entre os ângulos de alta resolução para inspecionar cada componente: o módulo de câmera dupla estabilizado, o sensor LiDAR frontal e o chassi dobrável de alta densidade.</p>
           
           <div class="specs-list">
-            <span class="spec-badge">🔄 Órbita 360° Livre</span>
-            <span class="spec-badge">🔍 Zoom Centralizado</span>
-            <span class="spec-badge">✨ Renderização PBR em Tempo Real</span>
+            <span class="spec-badge">🔍 Zoom com o Mouse</span>
+            <span class="spec-badge">📷 Fotos Oficiais 5K</span>
+            <span class="spec-badge">✨ 100% Realismo de Produto</span>
           </div>
         </div>
 
-        <div class="stage-3d">
-          <div id="loader-3d" class="loading-overlay">
-            <div class="spinner"></div>
-            <span>Carregando Drone em 3D...</span>
+        <div class="stage-interactive">
+          <div class="interactive-viewer" id="viewer-container">
+            <img id="interactive-img" src="assets/images/dji_air_3s_10.jpg" alt="DJI Air 3S Ângulo Oficial" class="interactive-img">
           </div>
-          <div id="canvas-drone-3d" class="canvas-container" data-model="model.glb"></div>
+
+          <div class="angle-selector">
+            <button class="angle-btn active" onclick="setAngle('assets/images/dji_air_3s_10.jpg', this)">Vista Frontal 3/4</button>
+            <button class="angle-btn" onclick="setAngle('assets/images/dji_air_3s_flight.png', this)">Em Voo</button>
+            <button class="angle-btn" onclick="setAngle('assets/images/dji_air_3s_11.jpg', this)">Câmera & LiDAR</button>
+            <button class="angle-btn" onclick="setAngle('assets/images/dji_air_3s_7.jpg', this)">Controle RC 2</button>
+          </div>
         </div>
       </div>
 
       <footer class="footnote">
-        <span>Arraste com o mouse para girar em 360° e use o scroll para aproximar</span>
-        <span>Three.js Engine • Mira Animator</span>
+        <span>Clique nos botões para alternar o ângulo e passe o mouse para inspecionar</span>
+        <span>Mira Animator • Real Product Turntable</span>
       </footer>
     </section>
 
@@ -493,7 +510,7 @@
 
       <div class="gallery-grid">
         <div class="gallery-main-img">
-          <img id="gallery-target" src="assets/images/dji_air_3s_flight.png" alt="DJI Air 3S em Voo" onerror="this.src='assets/images/dji_air_3s_2.jpg'">
+          <img id="gallery-target" src="assets/images/dji_air_3s_flight.png" alt="DJI Air 3S em Voo">
         </div>
 
         <div class="gallery-thumbs">
@@ -530,119 +547,35 @@
     </section>
   </main>
 
-  <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+  <script>
+    // Função de alternância de ângulos no Slide 3
+    function setAngle(imgSrc, btn) {
+      const img = document.getElementById('interactive-img');
+      img.style.opacity = '0';
+      img.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        img.src = imgSrc;
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+      }, 200);
 
-    function init3DViewer() {
-      const container = document.getElementById('canvas-drone-3d');
-      const loaderEl = document.getElementById('loader-3d');
-      if (!container) return;
-
-      const width = container.clientWidth || 600;
-      const height = container.clientHeight || 500;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-      camera.position.set(0, 0.6, 2.8);
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.35;
-      container.appendChild(renderer.domElement);
-
-      const controls = new OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
-      controls.enablePan = false;
-      controls.minDistance = 0.8;
-      controls.maxDistance = 5.5;
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 1.3;
-      controls.target.set(0, 0, 0);
-
-      let resumeTimer;
-      controls.addEventListener('start', () => {
-        controls.autoRotate = false;
-        clearTimeout(resumeTimer);
-      });
-      controls.addEventListener('end', () => {
-        resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 2000);
-      });
-
-      // Iluminação de Estúdio PBR
-      const ambientLight = new THREE.HemisphereLight(0xffffff, 0x1e293b, 2.4);
-      scene.add(ambientLight);
-
-      const keyLight = new THREE.DirectionalLight(0xffffff, 4.8);
-      keyLight.position.set(4, 7, 5);
-      scene.add(keyLight);
-
-      const fillLight = new THREE.DirectionalLight(0x38bdf8, 2.2);
-      fillLight.position.set(-5, -1, 4);
-      scene.add(fillLight);
-
-      const rimLight = new THREE.DirectionalLight(0xffffff, 4.0);
-      rimLight.position.set(0, 5, -6);
-      scene.add(rimLight);
-
-      const gltfLoader = new GLTFLoader();
-      gltfLoader.load('model.glb', (gltf) => {
-        const model = gltf.scene;
-        model.updateMatrixWorld(true);
-        
-        const box = new THREE.Box3().setFromObject(model);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
-        
-        model.position.x = -center.x;
-        model.position.y = -center.y;
-        model.position.z = -center.z;
-
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const targetScale = 1.45 / maxDim;
-        
-        const pivotGroup = new THREE.Group();
-        pivotGroup.add(model);
-        pivotGroup.scale.setScalar(targetScale);
-        scene.add(pivotGroup);
-
-        controls.target.set(0, 0, 0);
-        controls.update();
-
-        if (loaderEl) {
-          loaderEl.style.opacity = '0';
-          setTimeout(() => loaderEl?.remove(), 400);
-        }
-      }, undefined, (err) => {
-        console.error('Erro ao carregar modelo 3D:', err);
-        if (loaderEl) loaderEl.innerHTML = '<span style="color:#ef4444">Erro ao carregar modelo .glb</span>';
-      });
-
-      function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      const handleResize = () => {
-        const w = container.clientWidth;
-        const h = container.clientHeight;
-        if (!w || !h) return;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-      };
-      window.addEventListener('resize', handleResize);
-      new ResizeObserver(handleResize).observe(container);
+      document.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     }
 
-    init3DViewer();
+    // Zoom suave ao passar o mouse
+    const viewer = document.getElementById('viewer-container');
+    const interactiveImg = document.getElementById('interactive-img');
+    viewer.addEventListener('mousemove', (e) => {
+      const rect = viewer.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+      interactiveImg.style.transform = `scale(1.08) translate(${-x}px, ${-y}px)`;
+    });
+
+    viewer.addEventListener('mouseleave', () => {
+      interactiveImg.style.transform = 'scale(1) translate(0px, 0px)';
+    });
 
     // Navegação de slides
     const dots = document.querySelectorAll('.nav-dot');
