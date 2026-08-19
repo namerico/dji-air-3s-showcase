@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Alta Fidelidade com Visualizador Interativo e Fotos Oficiais.">
+  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Vendas com Inspeção Multi-Ângulo 360° de Alta Fidelidade.">
   <title>DJI Air 3S | Chase the View • Mira Experience</title>
   <link rel="icon" href="data:,">
   <style>
@@ -37,7 +37,7 @@
       line-height: 1.5;
     }
 
-    /* Navegação */
+    /* Navegação Lateral */
     .deck-nav {
       position: fixed;
       right: 24px;
@@ -97,7 +97,7 @@
     /* Grids */
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1.3fr;
+      grid-template-columns: 1fr 1.35fr;
       gap: 48px;
       align-items: center;
       margin: auto 0;
@@ -162,7 +162,7 @@
       color: #bae6fd;
     }
 
-    /* Palco de Imagem de Alta Fidelidade */
+    /* Palco de Imagem Hero */
     .stage-hero {
       width: 100%;
       height: 540px;
@@ -189,70 +189,70 @@
       transform: scale(1.04) translateY(-6px);
     }
 
-    /* Palco Interativo 360° do Drone */
-    .stage-interactive {
+    /* Palco Multi-Ângulo Interativo 360° */
+    .stage-multiangle {
       width: 100%;
-      height: 540px;
+      height: 560px;
       position: relative;
-      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, rgba(13, 17, 26, 0.7) 60%, transparent 85%);
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, rgba(13, 17, 26, 0.8) 65%, transparent 90%);
       border-radius: 24px;
       border: 1px solid var(--border);
       overflow: hidden;
-      box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 20px 50px rgba(0,0,0,0.5);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 24px 50px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       padding: 24px;
     }
 
-    .interactive-viewer {
+    .multiangle-viewer {
       width: 100%;
       height: 420px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      cursor: grab;
+      cursor: crosshair;
     }
 
-    .interactive-viewer:active {
-      cursor: grabbing;
-    }
-
-    .interactive-img {
-      max-width: 90%;
+    .multiangle-img {
+      max-width: 92%;
       max-height: 90%;
       object-fit: contain;
-      filter: drop-shadow(0 24px 36px rgba(0,0,0,0.9));
-      transition: transform 0.3s ease, opacity 0.4s ease;
+      filter: drop-shadow(0 24px 40px rgba(0,0,0,0.95));
+      transition: transform 0.25s ease, opacity 0.3s ease;
       user-select: none;
     }
 
-    .angle-selector {
+    .angle-controls {
       display: flex;
-      gap: 10px;
-      background: rgba(13, 17, 26, 0.9);
-      padding: 8px 16px;
+      gap: 12px;
+      background: rgba(13, 17, 26, 0.95);
+      padding: 8px 18px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
     .angle-btn {
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-secondary);
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
     }
 
     .angle-btn.active, .angle-btn:hover {
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(56, 189, 248, 0.18);
       border-color: var(--accent);
       color: #fff;
     }
@@ -377,11 +377,15 @@
       .slide {
         padding: 24px;
       }
-      .stage-hero, .stage-interactive {
-        height: 380px;
+      .stage-hero, .stage-multiangle {
+        height: 400px;
       }
       .gallery-main-img {
         height: 280px;
+      }
+      .angle-controls {
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   </style>
@@ -418,7 +422,7 @@
         </div>
 
         <div class="stage-hero">
-          <img src="assets/images/dji_air_3s_10.jpg" alt="DJI Air 3S Oficial" class="hero-product-img">
+          <img src="assets/images/air3s_angle_perspective.png" alt="DJI Air 3S Perspectiva Oficial" class="hero-product-img">
         </div>
       </div>
 
@@ -461,43 +465,51 @@
       </footer>
     </section>
 
-    <!-- Slide 3: INSPEÇÃO 360° REALISTA DO PRODUTO -->
+    <!-- Slide 3: MULTI-ÂNGULO INTERATIVO 360° COM AS 4 FOTOS OFICIAIS -->
     <section class="slide" id="slide-2">
       <header class="topline">
-        <div class="brand"><strong>DJI AIR 3S</strong> • INSPEÇÃO INTERATIVA 360°</div>
+        <div class="brand"><strong>DJI AIR 3S</strong> • INSPEÇÃO MULTI-ÂNGULO 360°</div>
         <div class="slide-no">03 / 04</div>
       </header>
 
       <div class="hero-grid">
         <div class="copy-block">
-          <p class="eyebrow">Design & Detalhes Fotográficos</p>
-          <h2>Inspeção <span class="accent">360° Realista</span></h2>
-          <p class="lead">Alterne entre os ângulos de alta resolução para inspecionar cada componente: o módulo de câmera dupla estabilizado, o sensor LiDAR frontal e o chassi dobrável de alta densidade.</p>
+          <p class="eyebrow">Inspeção Completa de Produto</p>
+          <h2>Design <span class="accent">Multi-Ângulo</span></h2>
+          <p class="lead">Explore as perspectivas oficiais do DJI Air 3S: vista em perspectiva, voo com hélices ativas, alinhamento frontal de estúdio e sensores inferiores de navegação.</p>
           
           <div class="specs-list">
-            <span class="spec-badge">🔍 Zoom com o Mouse</span>
-            <span class="spec-badge">📷 Fotos Oficiais 5K</span>
-            <span class="spec-badge">✨ 100% Realismo de Produto</span>
+            <span class="spec-badge">🔄 4 Ângulos Fotográficos</span>
+            <span class="spec-badge">🔍 Zoom Macro com o Mouse</span>
+            <span class="spec-badge">✨ 100% Realismo Comercial</span>
           </div>
         </div>
 
-        <div class="stage-interactive">
-          <div class="interactive-viewer" id="viewer-container">
-            <img id="interactive-img" src="assets/images/dji_air_3s_10.jpg" alt="DJI Air 3S Ângulo Oficial" class="interactive-img">
+        <div class="stage-multiangle">
+          <div class="multiangle-viewer" id="multi-viewer">
+            <img id="current-multi-img" src="assets/images/air3s_angle_perspective.png" alt="DJI Air 3S Ângulo" class="multiangle-img">
           </div>
 
-          <div class="angle-selector">
-            <button class="angle-btn active" onclick="setAngle('assets/images/dji_air_3s_10.jpg', this)">Vista Frontal 3/4</button>
-            <button class="angle-btn" onclick="setAngle('assets/images/dji_air_3s_flight.png', this)">Em Voo</button>
-            <button class="angle-btn" onclick="setAngle('assets/images/dji_air_3s_11.jpg', this)">Câmera & LiDAR</button>
-            <button class="angle-btn" onclick="setAngle('assets/images/dji_air_3s_7.jpg', this)">Controle RC 2</button>
+          <div class="angle-controls">
+            <button class="angle-btn active" onclick="switchAngle('assets/images/air3s_angle_perspective.png', this)">
+              <span>📐</span> Perspectiva 3/4
+            </button>
+            <button class="angle-btn" onclick="switchAngle('assets/images/air3s_angle_front.png', this)">
+              <span>🎯</span> Vista Frontal
+            </button>
+            <button class="angle-btn" onclick="switchAngle('assets/images/air3s_angle_action.png', this)">
+              <span>🛸</span> Voo Ativo
+            </button>
+            <button class="angle-btn" onclick="switchAngle('assets/images/air3s_angle_bottom.png', this)">
+              <span>⚡</span> Sensores Inferiores
+            </button>
           </div>
         </div>
       </div>
 
       <footer class="footnote">
-        <span>Clique nos botões para alternar o ângulo e passe o mouse para inspecionar</span>
-        <span>Mira Animator • Real Product Turntable</span>
+        <span>Clique nos botões de ângulo e passe o mouse sobre o drone para inspeção macro</span>
+        <span>Mira Deck Engine • 360 Turntable</span>
       </footer>
     </section>
 
@@ -548,36 +560,37 @@
   </main>
 
   <script>
-    // Função de alternância de ângulos no Slide 3
-    function setAngle(imgSrc, btn) {
-      const img = document.getElementById('interactive-img');
+    // Troca de ângulos no Slide 3
+    function switchAngle(src, btn) {
+      const img = document.getElementById('current-multi-img');
       img.style.opacity = '0';
-      img.style.transform = 'scale(0.95)';
+      img.style.transform = 'scale(0.96)';
       setTimeout(() => {
-        img.src = imgSrc;
+        img.src = src;
         img.style.opacity = '1';
         img.style.transform = 'scale(1)';
-      }, 200);
+      }, 150);
 
       document.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
 
-    // Zoom suave ao passar o mouse
-    const viewer = document.getElementById('viewer-container');
-    const interactiveImg = document.getElementById('interactive-img');
-    viewer.addEventListener('mousemove', (e) => {
-      const rect = viewer.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-      interactiveImg.style.transform = `scale(1.08) translate(${-x}px, ${-y}px)`;
+    // Zoom macro interativo ao passar o mouse
+    const multiViewer = document.getElementById('multi-viewer');
+    const multiImg = document.getElementById('current-multi-img');
+    
+    multiViewer.addEventListener('mousemove', (e) => {
+      const rect = multiViewer.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
+      multiImg.style.transform = `scale(1.12) translate(${-x}px, ${-y}px)`;
     });
 
-    viewer.addEventListener('mouseleave', () => {
-      interactiveImg.style.transform = 'scale(1) translate(0px, 0px)';
+    multiViewer.addEventListener('mouseleave', () => {
+      multiImg.style.transform = 'scale(1) translate(0px, 0px)';
     });
 
-    // Navegação de slides
+    // Navegação entre os 4 slides
     const dots = document.querySelectorAll('.nav-dot');
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
