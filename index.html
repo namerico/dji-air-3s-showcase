@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="DJI Air 3S | Apresentação Comercial de Vendas com Inspeção Multi-Ângulo 360° de Alta Fidelidade.">
-  <title>DJI Air 3S | Chase the View • Mira Experience</title>
+  <meta name="description" content="DJI Air 3S | Apresentação 3D Interativa Oficial • Mira Experience.">
+  <title>DJI Air 3S | Chase the View • Mira 3D Experience</title>
   <link rel="icon" href="data:,">
   <style>
     :root {
@@ -15,7 +15,6 @@
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
       --accent: #38bdf8;
-      --accent-orange: #f97316;
       --accent-glow: rgba(56, 189, 248, 0.25);
       --border: rgba(255, 255, 255, 0.08);
       --border-highlight: rgba(56, 189, 248, 0.3);
@@ -35,6 +34,7 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       line-height: 1.5;
+      user-select: none;
     }
 
     /* Navegação Lateral */
@@ -94,7 +94,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* Grids */
+    /* Grid do Hero e do Slide 3D */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1.35fr;
@@ -162,99 +162,67 @@
       color: #bae6fd;
     }
 
-    /* Palco de Imagem Hero */
-    .stage-hero {
-      width: 100%;
-      height: 540px;
-      position: relative;
-      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12) 0%, rgba(13, 17, 26, 0.6) 60%, transparent 85%);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 20px 50px rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-product-img {
-      width: 92%;
-      max-height: 88%;
-      object-fit: contain;
-      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.85));
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .stage-hero:hover .hero-product-img {
-      transform: scale(1.04) translateY(-6px);
-    }
-
-    /* Palco Multi-Ângulo Interativo 360° */
-    .stage-multiangle {
+    /* Palco 3D Interativo (Igual ao MacBook) */
+    .stage-3d-box {
       width: 100%;
       height: 560px;
       position: relative;
-      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, rgba(13, 17, 26, 0.8) 65%, transparent 90%);
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, rgba(13, 17, 26, 0.75) 60%, transparent 85%);
       border-radius: 24px;
       border: 1px solid var(--border);
       overflow: hidden;
       box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 24px 50px rgba(0,0,0,0.6);
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      padding: 24px;
+      justify-content: center;
+      cursor: grab;
     }
 
-    .multiangle-viewer {
+    .stage-3d-box:active {
+      cursor: grabbing;
+    }
+
+    .turntable-canvas-wrap {
       width: 100%;
-      height: 420px;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      cursor: crosshair;
+      position: relative;
     }
 
-    .multiangle-img {
+    .turntable-img {
       max-width: 92%;
-      max-height: 90%;
+      max-height: 88%;
       object-fit: contain;
-      filter: drop-shadow(0 24px 40px rgba(0,0,0,0.95));
-      transition: transform 0.25s ease, opacity 0.3s ease;
-      user-select: none;
+      filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.95));
+      transition: transform 0.1s ease-out;
+      pointer-events: none;
     }
 
-    .angle-controls {
-      display: flex;
-      gap: 12px;
-      background: rgba(13, 17, 26, 0.95);
-      padding: 8px 18px;
-      border-radius: 999px;
+    .turntable-shadow {
+      position: absolute;
+      bottom: 40px;
+      width: 70%;
+      height: 25px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+
+    .interaction-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13, 17, 26, 0.85);
       border: 1px solid var(--border);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-
-    .angle-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-secondary);
-      padding: 8px 16px;
+      padding: 6px 16px;
       border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.25s ease;
-    }
-
-    .angle-btn.active, .angle-btn:hover {
-      background: rgba(56, 189, 248, 0.18);
-      border-color: var(--accent);
-      color: #fff;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
     }
 
     /* Slide 2: Recursos */
@@ -377,15 +345,11 @@
       .slide {
         padding: 24px;
       }
-      .stage-hero, .stage-multiangle {
-        height: 400px;
+      .stage-3d-box {
+        height: 380px;
       }
       .gallery-main-img {
         height: 280px;
-      }
-      .angle-controls {
-        flex-wrap: wrap;
-        justify-content: center;
       }
     }
   </style>
@@ -421,8 +385,13 @@
           </div>
         </div>
 
-        <div class="stage-hero">
-          <img src="assets/images/air3s_angle_perspective.png" alt="DJI Air 3S Perspectiva Oficial" class="hero-product-img">
+        <!-- Palco 3D Hero Interativo -->
+        <div class="stage-3d-box" id="hero-turntable">
+          <div class="turntable-canvas-wrap">
+            <img id="hero-drone-img" src="assets/360_frames/frame_08.png" alt="DJI Air 3S 3D" class="turntable-img">
+            <div class="turntable-shadow"></div>
+          </div>
+          <div class="interaction-hint">↔️ Arraste com o mouse para girar em 360°</div>
         </div>
       </div>
 
@@ -465,51 +434,38 @@
       </footer>
     </section>
 
-    <!-- Slide 3: MULTI-ÂNGULO INTERATIVO 360° COM AS 4 FOTOS OFICIAIS -->
+    <!-- Slide 3: SLIDE 3D INTERATIVO (IGUAL AO MACBOOK) -->
     <section class="slide" id="slide-2">
       <header class="topline">
-        <div class="brand"><strong>DJI AIR 3S</strong> • INSPEÇÃO MULTI-ÂNGULO 360°</div>
+        <div class="brand"><strong>DJI AIR 3S</strong> • EXPERIÊNCIA 3D INTERATIVA</div>
         <div class="slide-no">03 / 04</div>
       </header>
 
       <div class="hero-grid">
         <div class="copy-block">
-          <p class="eyebrow">Inspeção Completa de Produto</p>
-          <h2>Design <span class="accent">Multi-Ângulo</span></h2>
-          <p class="lead">Explore as perspectivas oficiais do DJI Air 3S: vista em perspectiva, voo com hélices ativas, alinhamento frontal de estúdio e sensores inferiores de navegação.</p>
+          <p class="eyebrow">Design Industrial & Performance</p>
+          <h2>DJI <span class="accent">Air 3S 3D</span></h2>
+          <p class="lead">Estrutura aerodinâmica de alta precisão com braços dobráveis, sistema de câmera dupla 4K/60fps HDR com estabilização mecânica de 3 eixos e texturas oficiais de estúdio.</p>
           
           <div class="specs-list">
-            <span class="spec-badge">🔄 4 Ângulos Fotográficos</span>
-            <span class="spec-badge">🔍 Zoom Macro com o Mouse</span>
-            <span class="spec-badge">✨ 100% Realismo Comercial</span>
+            <span class="spec-badge highlight">🎯 Órbita 360° Contínua</span>
+            <span class="spec-badge">🔍 Zoom Centralizado</span>
+            <span class="spec-badge">✨ Alta Fidelidade Comercial</span>
           </div>
         </div>
 
-        <div class="stage-multiangle">
-          <div class="multiangle-viewer" id="multi-viewer">
-            <img id="current-multi-img" src="assets/images/air3s_angle_perspective.png" alt="DJI Air 3S Ângulo" class="multiangle-img">
+        <div class="stage-3d-box" id="main-turntable">
+          <div class="turntable-canvas-wrap">
+            <img id="main-drone-img" src="assets/360_frames/frame_08.png" alt="DJI Air 3S 3D Showcase" class="turntable-img">
+            <div class="turntable-shadow"></div>
           </div>
-
-          <div class="angle-controls">
-            <button class="angle-btn active" onclick="switchAngle('assets/images/air3s_angle_perspective.png', this)">
-              <span>📐</span> Perspectiva 3/4
-            </button>
-            <button class="angle-btn" onclick="switchAngle('assets/images/air3s_angle_front.png', this)">
-              <span>🎯</span> Vista Frontal
-            </button>
-            <button class="angle-btn" onclick="switchAngle('assets/images/air3s_angle_action.png', this)">
-              <span>🛸</span> Voo Ativo
-            </button>
-            <button class="angle-btn" onclick="switchAngle('assets/images/air3s_angle_bottom.png', this)">
-              <span>⚡</span> Sensores Inferiores
-            </button>
-          </div>
+          <div class="interaction-hint">↔️ Arraste com o mouse para girar em 360° e use o scroll para zoom</div>
         </div>
       </div>
 
       <footer class="footnote">
-        <span>Clique nos botões de ângulo e passe o mouse sobre o drone para inspeção macro</span>
-        <span>Mira Deck Engine • 360 Turntable</span>
+        <span>Arraste com o mouse para girar em 360° e use o scroll para zoom centralizado</span>
+        <span>Mira Animator • 3D Commercial Product Showcase</span>
       </footer>
     </section>
 
@@ -560,37 +516,116 @@
   </main>
 
   <script>
-    // Troca de ângulos no Slide 3
-    function switchAngle(src, btn) {
-      const img = document.getElementById('current-multi-img');
-      img.style.opacity = '0';
-      img.style.transform = 'scale(0.96)';
-      setTimeout(() => {
-        img.src = src;
-        img.style.opacity = '1';
-        img.style.transform = 'scale(1)';
-      }, 150);
+    // Sequência de 12 frames circulares 360°
+    const frames = [
+      'assets/360_frames/frame_08.png', // Frente
+      'assets/360_frames/frame_09.png', // Frente-Direita
+      'assets/360_frames/frame_03.png', // Ângulo Superior Direita
+      'assets/360_frames/frame_05.png', // Lateral Direita
+      'assets/360_frames/frame_11.png', // Lateral Perfil
+      'assets/360_frames/frame_02.png', // Topo
+      'assets/360_frames/frame_04.png', // Lateral Esquerda
+      'assets/360_frames/frame_07.png', // Frente-Esquerda
+      'assets/360_frames/frame_12.png', // Nível Frontal
+      'assets/360_frames/frame_06.png', // Frontal Elevada
+      'assets/360_frames/frame_10.png', // Ângulo Inferior
+      'assets/360_frames/frame_01.png'  // Base Inferior
+    ];
 
-      document.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // Pré-carregamento de todos os frames
+    frames.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Função de Turntable 3D com física de arraste (drag) e inércia
+    function setupTurntable(containerId, imgId) {
+      const container = document.getElementById(containerId);
+      const img = document.getElementById(imgId);
+      if (!container || !img) return;
+
+      let currentFrame = 0;
+      let startX = 0;
+      let isDragging = false;
+      let scale = 1;
+      let autoRotateTimer;
+      let isAutoRotating = true;
+
+      function updateFrame(index) {
+        currentFrame = (index + frames.length) % frames.length;
+        img.src = frames[currentFrame];
+      }
+
+      // Auto-rotação suave
+      setInterval(() => {
+        if (isAutoRotating) {
+          updateFrame(currentFrame + 1);
+        }
+      }, 350);
+
+      // Controle pelo Mouse
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        isAutoRotating = false;
+        startX = e.clientX;
+        clearTimeout(autoRotateTimer);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        if (Math.abs(deltaX) > 18) {
+          const step = deltaX > 0 ? 1 : -1;
+          updateFrame(currentFrame + step);
+          startX = e.clientX;
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          autoRotateTimer = setTimeout(() => { isAutoRotating = true; }, 3000);
+        }
+      });
+
+      // Suporte a Touch em Celulares / Tablets
+      container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        isAutoRotating = false;
+        startX = e.touches[0].clientX;
+        clearTimeout(autoRotateTimer);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.touches[0].clientX - startX;
+        if (Math.abs(deltaX) > 18) {
+          const step = deltaX > 0 ? 1 : -1;
+          updateFrame(currentFrame + step);
+          startX = e.touches[0].clientX;
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          autoRotateTimer = setTimeout(() => { isAutoRotating = true; }, 3000);
+        }
+      });
+
+      // Zoom Centralizado com Scroll do Mouse
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scale += e.deltaY * -0.0012;
+        scale = Math.min(Math.max(0.85, scale), 1.45);
+        img.style.transform = `scale(${scale})`;
+      }, { passive: false });
     }
 
-    // Zoom macro interativo ao passar o mouse
-    const multiViewer = document.getElementById('multi-viewer');
-    const multiImg = document.getElementById('current-multi-img');
-    
-    multiViewer.addEventListener('mousemove', (e) => {
-      const rect = multiViewer.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
-      multiImg.style.transform = `scale(1.12) translate(${-x}px, ${-y}px)`;
-    });
+    setupTurntable('hero-turntable', 'hero-drone-img');
+    setupTurntable('main-turntable', 'main-drone-img');
 
-    multiViewer.addEventListener('mouseleave', () => {
-      multiImg.style.transform = 'scale(1) translate(0px, 0px)';
-    });
-
-    // Navegação entre os 4 slides
+    // Navegação de slides
     const dots = document.querySelectorAll('.nav-dot');
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
